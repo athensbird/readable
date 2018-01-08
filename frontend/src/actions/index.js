@@ -1,6 +1,7 @@
 import {
   fetchPosts,
-  fetchCategories
+  fetchCategories,
+  addPost
 } from '../utils/api';
 export const ADD_POST = 'ADD_POST';
 export const POSTS_LOADED = 'POSTS_LOADED';
@@ -41,14 +42,11 @@ export function categoriesLoaded(categories) {
   }
 }
 
-export function addPost({id, timestamp, title, body, author, category}) {
-  return {
-    type: ADD_POST,
-    id,
-    timestamp,
-    title,
-    body,
-    author,
-    category
+export function add_post(post) {
+  return function (dispatch) {
+    addPost(post).then((post) => {
+      dispatch(load_posts());
+      return;
+    })
   }
 }
