@@ -4,17 +4,13 @@ import { connect } from 'react-redux'
 import {
   add_post,
   load_posts,
+  delete_post,
   load_categories
 } from '../actions';
-import logo from './logo.svg';
+import Modal from 'react-modal'
 import Category from './Category';
 import Postlist from './Postlist';
 import AddPost from './AddPost';
-import {
-  fetchCategories,
-  fetchPosts,
-  fetchComments
-} from '../utils/api';
 import './App.css';
 
 class App extends React.Component {
@@ -25,23 +21,54 @@ class App extends React.Component {
     loadingCategories: false,
     loadingPosts: false,
     loadingComments: false,
+    addPostModalOpen: false,
     categories: [],
     posts: [],
     comments: []
   }
+  openAddPostModel() {
+    this.setState({
+      addPostModalOpen: true
+    });
+  }
+  closeAddPostModel() {
+    this.setState({
+      addPostModalOpen: false
+    })
+  }
+  deletePost() {
+
+  }
+  componentWillMount() {
+    Modal.setAppElement('body');
+ }
   componentDidMount() {
     this.props.loadCategories();
     this.props.loadPosts();
   }
   render() {
-    const { categories, posts } = this.state;
+    const { categories, posts, addPostModalOpen } = this.state;
     return (
       <div className="App">
         <Category categories={this.props.categories} />
         <Postlist
           posts={this.props.posts}
+          deletePost={(id) => this.props.deletePost(id)}
         />
-        <AddPost />
+        <button onClick={() => this.openAddPostModel()}>
+          Add a post!
+        </button>
+        <Modal
+          className='modal'
+          overlayClassName='overlay'
+          isOpen={addPostModalOpen}
+          onRequestClose={this.closeAddPostModel}
+          contentLabel='Modal'
+        >
+          <AddPost
+            closeAddPost={() => this.closeAddPostModel()}
+          />
+        </Modal>
       </div>
     );
   }
@@ -57,7 +84,8 @@ function mapStateToProps (state) {
 function mapDispatchToProps (dispatch) {
   return {
     loadPosts: () => dispatch(load_posts()),
-    loadCategories: () => dispatch(load_categories())
+    loadCategories: () => dispatch(load_categories()),
+    deletePost: (id) => dispatch(delete_post(id))
   }
 }
 

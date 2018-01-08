@@ -18,17 +18,34 @@ export function fetchPosts() {
 }
 
 export function addPost(post) {
-  console.log(post);
   return fetch("http://localhost:3001/posts", {
+    method: 'POST',
+    body: JSON.stringify(post),
     headers: {
       method: 'POST',
       'Authorization' : 'OAuth2',
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      body: JSON.stringify(post)
     }
+  }).then(res => {
+    res.json()
   })
-  .then(res => {
+}
+
+export function updatePost() {
+  return fetch("http://localhost:3001/posts", {
+    method: 'PUT',
+    headers: headers.headers
+  }).then(res => {
+    res.json()
+  })
+}
+
+export function deletePost(id) {
+  return fetch("http://localhost:3001/posts/" + id, {
+    method: 'DELETE',
+    headers: headers.headers
+  }).then(res => {
     res.json()
   })
 }

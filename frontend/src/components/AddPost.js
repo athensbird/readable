@@ -53,6 +53,7 @@ class AddPost extends React.Component {
     }
   }
   render() {
+    const { closeAddPost, deletePost, updatePost } = this.props;
     return (
       <Form onSubmit={(e) => {
         this.handleSubmit(e);
@@ -70,7 +71,7 @@ class AddPost extends React.Component {
         Title: <input
           onChange={this.handleTitle.bind(this)}
           value={this.state.title}
-          placeholder="Enter the id" />
+          placeholder="Enter the title" />
         <br />
         Body: <input
           onChange={this.handleBody.bind(this)}
@@ -90,6 +91,11 @@ class AddPost extends React.Component {
         <Button
           onClick={(e) => {this.handleSubmit(e)}}
         >Add a new post</Button>
+        <Button
+        >Update the post</Button>
+        <Button
+          onClick={() => this.props.closeAddPost()}
+        >Exit</Button>
       </Form>
     )
   }

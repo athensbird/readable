@@ -1,7 +1,9 @@
 import {
   fetchPosts,
   fetchCategories,
-  addPost
+  addPost,
+  updatePost,
+  deletePost
 } from '../utils/api';
 export const ADD_POST = 'ADD_POST';
 export const POSTS_LOADED = 'POSTS_LOADED';
@@ -45,6 +47,15 @@ export function categoriesLoaded(categories) {
 export function add_post(post) {
   return function (dispatch) {
     addPost(post).then((post) => {
+      dispatch(load_posts());
+      return;
+    })
+  }
+}
+
+export function delete_post(id) {
+  return function (dispatch) {
+    deletePost(id).then(() => {
       dispatch(load_posts());
       return;
     })

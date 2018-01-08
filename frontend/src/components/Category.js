@@ -2,7 +2,6 @@ import React from 'react';
 
 function Category(props) {
   const { categories } = props;
-  console.log(categories);
   return (
     // <h1>test</h1>
     <ul className="categories-list">
