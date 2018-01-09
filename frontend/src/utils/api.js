@@ -61,7 +61,57 @@ export function changeVote(id, option) {
   })
 }
 
-// export function fetchComments() {
-//   return fetch("http://localhost:3001/comments", headers)
-//   .then(res => res.json())
-// }
+export function getCategoryPost(category) {
+  return fetch("http://localhost:3001/" + category + "/posts", {
+    method: 'GET',
+    headers: headers.headers
+  }).then(res => {
+    res.json()
+  })
+}
+
+export function fetchComments(postId) {
+  return fetch("http://localhost:3001/posts/" + postId + "/comments", headers)
+  .then(res => res.json())
+}
+
+export function postComment(comment) {
+  return fetch("http://localhost:3001/comments", {
+    method: 'POST',
+    body: JSON.stringify(comment),
+    headers: headers.headers
+  }).then(res => {
+    res.json()
+  })
+}
+
+export function getCommentDetail(id) {
+  return fetch(`http://localhost:3001/${id}`, {
+    headers: headers.headers
+  }).then(res => res.json())
+}
+
+export function changeCommentVote(id, option) {
+  return fetch(`http://localhost:3001/comments/${id}`, {
+    method:'POST',
+    body: JSON.stringify({'option': option}),
+    headers: headers.headers
+  }).then(res => {
+    res.json()
+  })
+}
+
+export function updateComment(id, content) {
+  return fetch(`http://localhost:3001/comments/${id}`, {
+    method: 'PUT',
+    body: JSON. stringify(content),
+    headers: headers.headers
+  }).then(res => res.json())
+}
+
+export function deleteComment(id) {
+  return fetch(`http://localhost:3001/comments/${id}`, {
+    method: 'DELETE',
+    headers: headers.headers
+  }).then(res => res.json())
+}

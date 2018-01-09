@@ -5,11 +5,12 @@ import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
 
 function Postlist(props) {
-  const { posts, deletePost } = props;
+  const { posts, deletePost, category } = props;
   return (
     <div>
       <ul className="post-list">
-        {posts.length > 0 && posts.map((post) => (
+        {posts.length > 0 && posts.filter((p) => p.category === category)
+          .map((post) => (
           <li key={post.id ? post.id : post.commentCount}>
             <Link to={"/posts/" + post.id}>{post.title}</Link>
             <br />
@@ -19,7 +20,6 @@ function Postlist(props) {
           </li>
         ))}
       </ul>
-      <Link to={"/"}>Home</Link>
     </div>
   )
 }

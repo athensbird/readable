@@ -41,7 +41,7 @@ class Post extends React.Component {
           post={post}
           updatePost={(id, content) => this.props.updatePost(id,content)}
         />
-        <Link to={"/posts/"}>Back to list</Link>
+        <Link to={"/"}>Back to list</Link>
       </div>
     );
   }

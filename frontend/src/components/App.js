@@ -7,11 +7,12 @@ import {
   delete_post,
   load_categories
 } from '../actions';
-import Modal from 'react-modal'
 import Category from './Category';
+import PostByCategory from './PostByCategory';
 import Postlist from './Postlist';
 import Post from './Post';
 import AddPost from './AddPost';
+import AddPostContainer from '../containers/AddPostContainer';
 import Navigation from './Navigation';
 import './App.css';
 
@@ -23,30 +24,16 @@ class App extends React.Component {
     loadingCategories: false,
     loadingPosts: false,
     loadingComments: false,
-    addPostModalOpen: false,
     categories: [],
     posts: [],
     comments: []
   }
-  openAddPostModel() {
-    this.setState({
-      addPostModalOpen: true
-    });
-  }
-  closeAddPostModel() {
-    this.setState({
-      addPostModalOpen: false
-    })
-  }
-  componentWillMount() {
-    Modal.setAppElement('body');
- }
   componentDidMount() {
     this.props.loadCategories();
     this.props.loadPosts();
   }
   render() {
-    const { categories, posts, addPostModalOpen } = this.state;
+    const { categories, posts } = this.state;
     return (
       <BrowserRouter>
         <div>
@@ -54,37 +41,18 @@ class App extends React.Component {
             <Route path="/categories">
               <Category categories={this.props.categories} />
             </Route>
-            <Route path="/posts" exact>
-              <Postlist
-                posts={this.props.posts}
-                deletePost={(id) => this.props.deletePost(id)}
-              />
-            </Route>
+            <Route path="/:category/posts" component={PostByCategory} />
             <Route path="/posts/:id"
               exact
               component={Post}
             />
-            <Route path="/addpost" exact>
-              <div>
-                <button onClick={() => this.openAddPostModel()}>
-                  Add a post!
-                </button>
-                <br/>
-                <Link to={'/'}>Home</Link>
-                <Modal
-                  className='modal'
-                  overlayClassName='overlay'
-                  isOpen={addPostModalOpen}
-                  onRequestClose={this.closeAddPostModel}
-                  contentLabel='Modal'
-                >
-                  <AddPost
-                    closeAddPost={() => this.closeAddPostModel()}
-                  />
-                </Modal>
-            </div>
+            <Route path="/">
+              <Category
+                categories={this.props.categories}
+                posts={this.props.posts}
+                deletePost={(id) => this.props.deletePost(id)}
+              />
             </Route>
-            <Route path="/" component={Navigation} />
           </Switch>
         </div>
       </BrowserRouter>
@@ -111,23 +79,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(App);
-
-/*
-<div className="App">
-  <Category categories={this.props.categories} />
-  <button onClick={() => this.openAddPostModel()}>
-    Add a post!
-  </button>
-  <Modal
-    className='modal'
-    overlayClassName='overlay'
-    isOpen={addPostModalOpen}
-    onRequestClose={this.closeAddPostModel}
-    contentLabel='Modal'
-  >
-    <AddPost
-      closeAddPost={() => this.closeAddPostModel()}
-    />
-  </Modal>
-</div>
-*/
