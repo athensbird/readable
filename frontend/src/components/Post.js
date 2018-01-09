@@ -2,7 +2,7 @@ import React, { Component }from 'react';
 import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { load_posts } from '../actions';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class Post extends React.Component {
   componentDidMount() {

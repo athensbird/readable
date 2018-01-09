@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {BrowserRouter, Switch, Route} from "react-router-dom";
+import {BrowserRouter, Switch, Route, Link} from "react-router-dom";
 import { connect } from 'react-redux'
 import {
   add_post,
@@ -12,6 +12,7 @@ import Category from './Category';
 import Postlist from './Postlist';
 import Post from './Post';
 import AddPost from './AddPost';
+import Navigation from './Navigation';
 import './App.css';
 
 class App extends React.Component {
@@ -71,6 +72,8 @@ class App extends React.Component {
                 <button onClick={() => this.openAddPostModel()}>
                   Add a post!
                 </button>
+                <br/>
+                <Link to={'/'}>Home</Link>
                 <Modal
                   className='modal'
                   overlayClassName='overlay'
@@ -84,6 +87,7 @@ class App extends React.Component {
                 </Modal>
             </div>
             </Route>
+            <Route path="/" component={Navigation} />
           </Switch>
         </div>
       </BrowserRouter>
