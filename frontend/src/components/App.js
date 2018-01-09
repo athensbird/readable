@@ -38,9 +38,6 @@ class App extends React.Component {
       addPostModalOpen: false
     })
   }
-  deletePost() {
-
-  }
   componentWillMount() {
     Modal.setAppElement('body');
  }

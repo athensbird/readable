@@ -60,3 +60,12 @@ export function delete_post(id) {
     })
   }
 }
+
+export function update_post(id, content) {
+  return function (dispatch) {
+    updatePost(id, content).then(() => {
+      dispatch(load_posts());
+      return;
+    })
+  }
+}

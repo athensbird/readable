@@ -32,9 +32,10 @@ export function addPost(post) {
   })
 }
 
-export function updatePost() {
-  return fetch("http://localhost:3001/posts", {
+export function updatePost(id, content) {
+  return fetch("http://localhost:3001/posts/" + id, {
     method: 'PUT',
+    body: JSON.stringify(content),
     headers: headers.headers
   }).then(res => {
     res.json()

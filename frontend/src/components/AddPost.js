@@ -7,12 +7,12 @@ class AddPost extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-    id: '',
-    timestamp: '',
-    title: '',
-    body: '',
-    author: '',
-    category: ''
+      id: '',
+      timestamp: '',
+      title: '',
+      body: '',
+      author: '',
+      category: ''
     }
   }
   handleId(event) {
@@ -46,7 +46,6 @@ class AddPost extends React.Component {
     });
   }
   handleSubmit(e) {
-    console.log('handleSubmit called!');
     e.preventDefault();
     if (this.props.addPost) {
       this.props.addPost(this.state);
