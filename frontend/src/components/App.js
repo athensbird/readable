@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom';
+import {BrowserRouter, Switch, Route} from "react-router-dom";
 import { connect } from 'react-redux'
 import {
   add_post,
@@ -10,6 +10,7 @@ import {
 import Modal from 'react-modal'
 import Category from './Category';
 import Postlist from './Postlist';
+import Post from './Post';
 import AddPost from './AddPost';
 import './App.css';
 
@@ -49,27 +50,43 @@ class App extends React.Component {
   render() {
     const { categories, posts, addPostModalOpen } = this.state;
     return (
-      <div className="App">
-        <Category categories={this.props.categories} />
-        <Postlist
-          posts={this.props.posts}
-          deletePost={(id) => this.props.deletePost(id)}
-        />
-        <button onClick={() => this.openAddPostModel()}>
-          Add a post!
-        </button>
-        <Modal
-          className='modal'
-          overlayClassName='overlay'
-          isOpen={addPostModalOpen}
-          onRequestClose={this.closeAddPostModel}
-          contentLabel='Modal'
-        >
-          <AddPost
-            closeAddPost={() => this.closeAddPostModel()}
-          />
-        </Modal>
-      </div>
+      <BrowserRouter>
+        <div>
+          <Switch>
+            <Route path="/categories">
+              <Category categories={this.props.categories} />
+            </Route>
+            <Route path="/posts" exact>
+              <Postlist
+                posts={this.props.posts}
+                deletePost={(id) => this.props.deletePost(id)}
+              />
+            </Route>
+            <Route path="/posts/:id"
+              exact
+              component={Post}
+            />
+            <Route path="/addpost" exact>
+              <div>
+                <button onClick={() => this.openAddPostModel()}>
+                  Add a post!
+                </button>
+                <Modal
+                  className='modal'
+                  overlayClassName='overlay'
+                  isOpen={addPostModalOpen}
+                  onRequestClose={this.closeAddPostModel}
+                  contentLabel='Modal'
+                >
+                  <AddPost
+                    closeAddPost={() => this.closeAddPostModel()}
+                  />
+                </Modal>
+            </div>
+            </Route>
+          </Switch>
+        </div>
+      </BrowserRouter>
     );
   }
 }
@@ -93,3 +110,23 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(App);
+
+/*
+<div className="App">
+  <Category categories={this.props.categories} />
+  <button onClick={() => this.openAddPostModel()}>
+    Add a post!
+  </button>
+  <Modal
+    className='modal'
+    overlayClassName='overlay'
+    isOpen={addPostModalOpen}
+    onRequestClose={this.closeAddPostModel}
+    contentLabel='Modal'
+  >
+    <AddPost
+      closeAddPost={() => this.closeAddPostModel()}
+    />
+  </Modal>
+</div>
+*/

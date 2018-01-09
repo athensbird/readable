@@ -13,7 +13,6 @@ export const CATEGORIES_LOADED = 'CATEGORIES_LOADED';
 export function load_posts() {
   return function (dispatch) {
     fetchPosts().then((posts) => {
-      console.log(posts);
       dispatch(postsLoaded(posts));
       return;
     })

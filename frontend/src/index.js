@@ -8,15 +8,6 @@ import reducers from './reducers'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk';
 
-// const logger = store => next => action => {
-//   console.group(action.type)
-//   console.info('dispatching', action)
-//   let result = next(action)
-//   console.log('next state', store.getState())
-//   console.groupEnd(action.type)
-//   return result
-// }
-
 const composeEnhancers =
  typeof window === "object" &&
  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
@@ -28,13 +19,6 @@ const store = createStore(
     applyMiddleware(thunk)
   )
 )
-
-// const store = {
-//   Istanbul: 'Turkey',
-//   Tokyo: 'Japan',
-//   Tehran: 'Iran',
-//   Jerusalem: 'Israel'
-// }
 
 ReactDOM.render(
   <Provider store={store}>

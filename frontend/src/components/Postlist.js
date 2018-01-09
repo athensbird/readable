@@ -1,6 +1,5 @@
 import React from 'react';
 import Post from './Post';
-import Modal from 'react-modal';
 import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import {Link} from "react-router-dom";
@@ -11,8 +10,8 @@ function Postlist(props) {
     <ul className="post-list">
       {posts.length > 0 && posts.map((post) => (
         <li key={post.id ? post.id : post.commentCount}>
-          <p>{post.title}</p>
-          <Post post={post} key={post.id}/>
+          <Link to={"/posts/" + post.id}>{post.title}</Link>
+          <br />
           <Button
             onClick={() => props.deletePost(post.id)}
           >Delete the post</Button>
@@ -23,3 +22,7 @@ function Postlist(props) {
 }
 
 export default Postlist;
+
+/*
+<Post post={post} key={post.id}/>
+*/
