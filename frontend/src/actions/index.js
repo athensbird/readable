@@ -3,7 +3,8 @@ import {
   fetchCategories,
   addPost,
   updatePost,
-  deletePost
+  deletePost,
+  changeVote
 } from '../utils/api';
 export const ADD_POST = 'ADD_POST';
 export const POSTS_LOADED = 'POSTS_LOADED';
@@ -57,6 +58,15 @@ export function delete_post(id) {
     deletePost(id).then(() => {
       dispatch(load_posts());
       return;
+    })
+  }
+}
+
+export function change_vote(id, option) {
+  return function (dispatch) {
+    changeVote(id, option).then(() => {
+      console.log(id, option);
+      dispatch(load_posts());
     })
   }
 }

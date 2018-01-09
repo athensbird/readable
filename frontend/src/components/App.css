@@ -22,6 +22,14 @@
   font-size: large;
 }
 
+.TiArrowSortedUp {
+  font-size: 15;
+}
+
+.TiArrowSortedDown {
+  font-size: 15;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

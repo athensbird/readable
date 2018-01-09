@@ -51,6 +51,16 @@ export function deletePost(id) {
   })
 }
 
+export function changeVote(id, option) {
+  return fetch("http://localhost:3001/posts/" + id, {
+    method:'POST',
+    body: JSON.stringify({'option': option}),
+    headers: headers.headers
+  }).then(res => {
+    res.json()
+  })
+}
+
 // export function fetchComments() {
 //   return fetch("http://localhost:3001/comments", headers)
 //   .then(res => res.json())
