@@ -5,7 +5,12 @@ import {
   updatePost,
   deletePost,
   changeVote,
-  fetchComments
+  fetchComments,
+  postComment,
+  getCommentDetail,
+  changeCommentVote,
+  updateComment,
+  deleteComment
 } from '../utils/api';
 export const ADD_POST = 'ADD_POST';
 export const POSTS_LOADED = 'POSTS_LOADED';
@@ -18,6 +23,14 @@ export function load_posts() {
       dispatch(postsLoaded(posts));
       return;
     })
+  }
+}
+
+export function commentsLoaded(comments) {
+  return {
+    type: COMMENTS_LOADED,
+    id: comments.id,
+    comments
   }
 }
 
@@ -42,13 +55,6 @@ export function categoriesLoaded(categories) {
   return {
     type: CATEGORIES_LOADED,
     categories: categories.categories
-  }
-}
-
-export function commentsLoaded(comments) {
-  return {
-    type: COMMENTS_LOADED,
-    comments
   }
 }
 
@@ -90,8 +96,8 @@ export function update_post(id, content) {
 
 export function fetch_comments(id) {
   return function (dispatch) {
-    fetchComments(id).then(() => {
-      dispatch();
+    fetchComments(id).then((comments) => {
+      dispatch(commentsLoaded(comments));
     })
   }
 }

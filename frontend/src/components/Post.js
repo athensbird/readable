@@ -1,11 +1,13 @@
 import React, { Component }from 'react';
 import UpdatePostModal from './UpdatePostModal';
+import CommentList from './CommentList';
 import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import {
   load_posts,
   update_post,
-  change_vote
+  change_vote,
+  fetch_comments
 } from '../actions';
 import { Link } from "react-router-dom";
 import TiArrowSortedUp from 'react-icons/lib/ti/arrow-sorted-up';
@@ -15,6 +17,7 @@ import './App.css'
 class Post extends React.Component {
   componentDidMount() {
     this.props.loadPosts();
+    this.props.fetchComments(this.props.match.params.id);
   }
   render() {
     const postId = this.props.match.params.id;
@@ -49,7 +52,8 @@ class Post extends React.Component {
 
 function mapStateToProps (state) {
   return {
-    posts: state.post
+    posts: state.post,
+    comments: state.comment
   };
 }
 
@@ -57,7 +61,8 @@ function mapDispatchToProps (dispatch) {
   return {
     loadPosts: () => dispatch(load_posts()),
     updatePost: (id, content) => dispatch(update_post(id, content)),
-    changeVote: (id, option) => dispatch(change_vote(id, option))
+    changeVote: (id, option) => dispatch(change_vote(id, option)),
+    fetchComments: (id) => dispatch(fetch_comments(id))
   }
 }
 
