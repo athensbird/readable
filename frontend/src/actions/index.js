@@ -12,6 +12,7 @@ import {
   updateComment,
   deleteComment
 } from '../utils/api';
+import uuid from 'uuid';
 export const ADD_POST = 'ADD_POST';
 export const POSTS_LOADED = 'POSTS_LOADED';
 export const CATEGORIES_LOADED = 'CATEGORIES_LOADED';
@@ -67,8 +68,13 @@ export function categoriesLoaded(categories) {
 }
 
 export function add_post(post) {
+  const postBody = {
+    ...post,
+    id: uuid(),
+    timestamp: Date.now()
+  };
   return function (dispatch) {
-    addPost(post).then((post) => {
+    addPost(postBody).then((post) => {
       dispatch(load_posts());
       return;
     })
@@ -120,8 +126,13 @@ export function load_comments(postId) {
 
 
 export function add_comment(comment) {
+  const commentBody = {
+    ...comment,
+    id: uuid(),
+    timestamp: Date.now()
+  }
   return function (dispatch) {
-    postComment(comment).then(() => {
+    postComment(commentBody).then(() => {
       dispatch(load_comments(comment.parentId))
     });
   }

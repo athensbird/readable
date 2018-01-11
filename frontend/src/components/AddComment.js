@@ -12,22 +12,10 @@ class AddComment extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: '',
-      timestamp: '',
       body: '',
       author: '',
       parentId: this.props.postId
     }
-  }
-  handleId(event) {
-    this.setState({
-      id: event.target.value
-    });
-  }
-  handleTimestamp(event) {
-    this.setState({
-      timestamp: event.target.value
-    });
   }
   handleBody(event) {
     this.setState({
@@ -52,16 +40,6 @@ class AddComment extends React.Component {
         <Form onSubmit={(e) => {
           this.handleSubmit(e);
         }}>
-          Id: <input
-            onChange={this.handleId.bind(this)}
-            value={this.state.id}
-            placeholder="Enter the id" />
-          <br />
-          Timestamp: <input
-            onChange={this.handleTimestamp.bind(this)}
-            value={this.state.timestamp}
-            placeholder="Enter the timestamp" />
-          <br />
           Body: <input
             onChange={this.handleBody.bind(this)}
             value={this.state.body}

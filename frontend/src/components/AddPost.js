@@ -7,23 +7,11 @@ class AddPost extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: '',
-      timestamp: '',
       title: '',
       body: '',
       author: '',
       category: ''
     }
-  }
-  handleId(event) {
-    this.setState({
-      id: event.target.value
-    });
-  }
-  handleTimestamp(event) {
-    this.setState({
-      timestamp: event.target.value
-    });
   }
   handleTitle(event) {
     this.setState({
@@ -57,16 +45,6 @@ class AddPost extends React.Component {
       <Form onSubmit={(e) => {
         this.handleSubmit(e);
       }}>
-        Id: <input
-          onChange={this.handleId.bind(this)}
-          value={this.state.id}
-          placeholder="Enter the id" />
-        <br />
-        Timestamp: <input
-          onChange={this.handleTimestamp.bind(this)}
-          value={this.state.timestamp}
-          placeholder="Enter the timestamp" />
-        <br />
         Title: <input
           onChange={this.handleTitle.bind(this)}
           value={this.state.title}
