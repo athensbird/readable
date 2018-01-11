@@ -6,7 +6,6 @@ const headers = {
   }
 }
 
-
 export function fetchCategories() {
   return fetch("http://localhost:3001/categories", headers)
   .then(res => res.json())
@@ -72,7 +71,9 @@ export function getCategoryPost(category) {
 
 export function fetchComments(postId) {
   return fetch("http://localhost:3001/posts/" + postId + "/comments", headers)
-  .then(res => res.json())
+  .then(res => {
+    return res.json();
+  })
 }
 
 export function postComment(comment) {
@@ -85,13 +86,14 @@ export function postComment(comment) {
   })
 }
 
-export function getCommentDetail(id) {
-  return fetch(`http://localhost:3001/${id}`, {
+export function getSingleComment(id) {
+  return fetch(`http://localhost:3001/comments/${id}`, {
     headers: headers.headers
   }).then(res => res.json())
 }
 
 export function changeCommentVote(id, option) {
+  console.log('vote change initiated');
   return fetch(`http://localhost:3001/comments/${id}`, {
     method:'POST',
     body: JSON.stringify({'option': option}),

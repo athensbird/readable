@@ -7,7 +7,7 @@ import {
   changeVote,
   fetchComments,
   postComment,
-  getCommentDetail,
+  getSingleComment,
   changeCommentVote,
   updateComment,
   deleteComment
@@ -16,6 +16,7 @@ export const ADD_POST = 'ADD_POST';
 export const POSTS_LOADED = 'POSTS_LOADED';
 export const CATEGORIES_LOADED = 'CATEGORIES_LOADED';
 export const COMMENTS_LOADED = 'COMMENTS_LOADED';
+export const SINGLE_COMMENT_LOADED = 'SINGLE_COMMENT_LOADED';
 
 export function load_posts() {
   return function (dispatch) {
@@ -29,8 +30,14 @@ export function load_posts() {
 export function commentsLoaded(comments) {
   return {
     type: COMMENTS_LOADED,
-    id: comments.id,
     comments
+  }
+}
+
+export function single_comment_loaded(comment) {
+  return {
+    type: SINGLE_COMMENT_LOADED,
+    comment
   }
 }
 
@@ -85,6 +92,14 @@ export function change_vote(id, option) {
   }
 }
 
+export function change_comment_vote(postId, commentId, option) {
+  return function (dispatch) {
+    changeCommentVote(commentId, option).then(() => {
+      dispatch(get_single_comment(commentId));
+    })
+  }
+}
+
 export function update_post(id, content) {
   return function (dispatch) {
     updatePost(id, content).then(() => {
@@ -94,10 +109,35 @@ export function update_post(id, content) {
   }
 }
 
-export function fetch_comments(id) {
+export function load_comments(postId) {
   return function (dispatch) {
-    fetchComments(id).then((comments) => {
+    fetchComments(postId).then((comments) => {
       dispatch(commentsLoaded(comments));
+    })
+  }
+}
+
+
+export function add_comment(comment) {
+  return function (dispatch) {
+    postComment(comment).then(() => {
+      dispatch(load_comments(comment.parentId))
+    });
+  }
+}
+
+export function get_single_comment(id) {
+  return function (dispatch) {
+    getSingleComment(id).then((comment) => {
+      dispatch(single_comment_loaded(comment));
+    })
+  }
+}
+
+export function delete_comment(id, postId) {
+  return function (dispatch) {
+    deleteComment(id).then(() => {
+      dispatch(get_single_comment(id));
     })
   }
 }
