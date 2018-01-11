@@ -1,14 +1,15 @@
 import React from 'react';
 import Modal from 'react-modal'
 import { Form, Button } from 'react-bootstrap';
+import { connect } from 'react-router-dom';
 
 class UpdatePostModal extends React.Component {
   constructor(props) {
     super(props);
-    const { post } = this.props;
+    console.log(props);
     this.state = {
-      title: post.title,
-      body: post.body
+      title: this.props.post.title,
+      body: this.props.post.body
     };
   }
   handleSubmit(e) {

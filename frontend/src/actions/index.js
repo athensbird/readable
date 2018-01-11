@@ -154,3 +154,15 @@ export function delete_comment(id, postId) {
     })
   }
 }
+
+export function update_comment(id, body) {
+  const comment = {
+    body: body.body,
+    timestamp: Date.now()
+  }
+  return function (dispatch) {
+    updateComment(id, comment).then((comment) => {
+      dispatch(single_comment_loaded(comment));
+    })
+  }
+}

@@ -21,7 +21,8 @@ class Post extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loadingPosts: false
+      loadingPosts: false,
+      updatePostModalOpen: false
     };
   }
   componentDidMount() {
@@ -29,6 +30,11 @@ class Post extends React.Component {
     this.props.loadComments(this.props.match.params.id);
     this.setState({
       loadingPosts: true
+    });
+  }
+  toggleUpdateModal() {
+    this.setState({
+      updatePostModalOpen: !this.state.updatePostModalOpen
     });
   }
   render() {
@@ -55,10 +61,15 @@ class Post extends React.Component {
         ><TiArrowSortedDown /></Button>
         <p>author: {post.author}</p>
         <p>#comments: {post.commentCount}</p>
-        <UpdatePostModal
-          post={post}
-          updatePost={(id, content) => this.props.updatePost(id,content)}
-        />
+        <Button onClick={() => {this.toggleUpdateModal()}}>
+        {this.state.updatePostModalOpen ? <p>close update</p> : <p>update post</p>}
+        </Button>
+        {this.state.updatePostModalOpen ?
+          <UpdatePostModal
+            post={post}
+            updatePost={(id, content) => this.props.updatePost(id,content)}
+          /> : null
+        }
         <CommentList
           comments={comments}
           changeCommentVote={(postId, commentId, option) => this.props.changeCommentVote(postId,commentId,option)}

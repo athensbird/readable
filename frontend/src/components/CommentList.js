@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Jumbotron, Button } from 'react-bootstrap';
+import UpdateComment from './UpdateComment';
 import TiArrowSortedUp from 'react-icons/lib/ti/arrow-sorted-up';
 import TiArrowSortedDown from 'react-icons/lib/ti/arrow-sorted-down';
 import './App.css';
@@ -28,9 +29,10 @@ function CommentList(props) {
             <Button
               onClick={() => props.deleteComment(comment.id, comment.postId)}
             >Delete this comment</Button>
-            <br/>
+            <br />
+            <br />
+            <UpdateComment comment={comment} />
           </div> : null }
-
         </Jumbotron>
       ))}
     </div>

@@ -102,10 +102,10 @@ export function changeCommentVote(id, option) {
   })
 }
 
-export function updateComment(id, content) {
+export function updateComment(id, body) {
   return fetch(`http://localhost:3001/comments/${id}`, {
     method: 'PUT',
-    body: JSON. stringify(content),
+    body: JSON.stringify(body),
     headers: headers.headers
   }).then(res => res.json())
 }
