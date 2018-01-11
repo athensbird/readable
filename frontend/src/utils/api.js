@@ -93,7 +93,6 @@ export function getSingleComment(id) {
 }
 
 export function changeCommentVote(id, option) {
-  console.log('vote change initiated');
   return fetch(`http://localhost:3001/comments/${id}`, {
     method:'POST',
     body: JSON.stringify({'option': option}),

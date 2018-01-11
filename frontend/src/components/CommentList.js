@@ -29,7 +29,7 @@ function CommentList(props) {
               onClick={() => props.deleteComment(comment.id, comment.postId)}
             >Delete this comment</Button>
             <br/>
-          </div> : <div>empty</div>}
+          </div> : null }
 
         </Jumbotron>
       ))}

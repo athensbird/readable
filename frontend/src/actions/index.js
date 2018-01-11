@@ -17,6 +17,7 @@ export const POSTS_LOADED = 'POSTS_LOADED';
 export const CATEGORIES_LOADED = 'CATEGORIES_LOADED';
 export const COMMENTS_LOADED = 'COMMENTS_LOADED';
 export const SINGLE_COMMENT_LOADED = 'SINGLE_COMMENT_LOADED';
+export const REMOVE_SINGLE_COMMENT = 'REMOVE_SINGLE_COMMENT';
 
 export function load_posts() {
   return function (dispatch) {
@@ -134,10 +135,11 @@ export function get_single_comment(id) {
   }
 }
 
+
 export function delete_comment(id, postId) {
   return function (dispatch) {
-    deleteComment(id).then(() => {
-      dispatch(get_single_comment(id));
+    deleteComment(id).then((comment) => {
+      dispatch(single_comment_loaded(comment));
     })
   }
 }

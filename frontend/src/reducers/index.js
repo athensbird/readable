@@ -64,7 +64,7 @@ function comment (state = initialCommentList, action) {
       return {
         ...state,
         commentList: updatedComments
-      };
+      }
     default:
       return state;
   }
