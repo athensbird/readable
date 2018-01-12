@@ -22,7 +22,8 @@ class Post extends React.Component {
     super(props);
     this.state = {
       loadingPosts: false,
-      updatePostModalOpen: false
+      updatePostModalOpen: false,
+      addCommentOpen: false
     };
   }
   componentDidMount() {
@@ -35,6 +36,11 @@ class Post extends React.Component {
   toggleUpdateModal() {
     this.setState({
       updatePostModalOpen: !this.state.updatePostModalOpen
+    });
+  }
+  toggleAddComment() {
+    this.setState({
+      addCommentOpen: !this.state.addCommentOpen
     });
   }
   render() {
@@ -64,19 +70,19 @@ class Post extends React.Component {
         <Button onClick={() => {this.toggleUpdateModal()}}>
         {this.state.updatePostModalOpen ? <p>close update</p> : <p>update post</p>}
         </Button>
-        {this.state.updatePostModalOpen ?
+        {this.state.updatePostModalOpen &&
           <UpdatePostModal
             post={post}
             updatePost={(id, content) => this.props.updatePost(id,content)}
-          /> : null
-        }
+          />}
         <CommentList
           comments={comments}
           changeCommentVote={(postId, commentId, option) => this.props.changeCommentVote(postId,commentId,option)}
           deleteComment={(id, postId) => this.props.deleteComment(id, postId)}
           loadComments={(id) => this.props.loadComments(id)}
         />
-        <AddComment postId={postId}/>
+        <Button onClick={() => this.toggleAddComment()}>{this.state.addCommentOpen ? <p>Close</p> : <p>Add a comment</p>}</Button>
+        {this.state.addCommentOpen && <AddComment postId={postId}/>}
         <Link to={"/"}>Back to list</Link>
       </div>
     );
