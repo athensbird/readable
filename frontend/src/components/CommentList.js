@@ -7,7 +7,14 @@ import TiArrowSortedDown from 'react-icons/lib/ti/arrow-sorted-down';
 import './App.css';
 
 function CommentList(props) {
-  const { comments, fetchComments, changeCommentVote, deleteComment } = props;
+  const {
+    comments,
+    fetchComments,
+    changeCommentVote,
+    deleteComment,
+    toggleUpdateComment ,
+    updateCommentOpen
+  } = props;
   return (
     <div className="comment">
       {comments.map(comment => (
@@ -31,7 +38,8 @@ function CommentList(props) {
             >Delete this comment</Button>
             <br />
             <br />
-            <UpdateComment comment={comment} />
+            <Button onClick={() => props.toggleUpdateComment()}>{props.updateCommentOpen ? <p>close</p> : <p>update</p>}</Button>
+            {props.updateCommentOpen && <UpdateComment comment={comment} /> }
           </div> : null }
         </Jumbotron>
       ))}
@@ -40,21 +48,3 @@ function CommentList(props) {
 }
 
 export default CommentList;
-
-/*
-function mapStateToProps(state) {
-  return {
-
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-
-  }
-}
-
-export default connect(
-  mapStateToProps, mapDispatchToProps
-)(CommentList);
-*/

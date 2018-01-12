@@ -15,7 +15,7 @@ import {
 import { Link } from "react-router-dom";
 import TiArrowSortedUp from 'react-icons/lib/ti/arrow-sorted-up';
 import TiArrowSortedDown from 'react-icons/lib/ti/arrow-sorted-down';
-import './App.css'
+import './Post.css'
 
 class Post extends React.Component {
   constructor(props) {
@@ -23,7 +23,8 @@ class Post extends React.Component {
     this.state = {
       loadingPosts: false,
       updatePostModalOpen: false,
-      addCommentOpen: false
+      addCommentOpen: false,
+      updateCommentOpen: false
     };
   }
   componentDidMount() {
@@ -41,6 +42,11 @@ class Post extends React.Component {
   toggleAddComment() {
     this.setState({
       addCommentOpen: !this.state.addCommentOpen
+    });
+  }
+  toggleUpdateComment() {
+    this.setState({
+      updateCommentOpen: !this.state.updateCommentOpen
     });
   }
   render() {
@@ -80,6 +86,8 @@ class Post extends React.Component {
           changeCommentVote={(postId, commentId, option) => this.props.changeCommentVote(postId,commentId,option)}
           deleteComment={(id, postId) => this.props.deleteComment(id, postId)}
           loadComments={(id) => this.props.loadComments(id)}
+          toggleUpdateComment={() => this.toggleUpdateComment()}
+          updateCommentOpen={this.state.updateCommentOpen}
         />
         <Button onClick={() => this.toggleAddComment()}>{this.state.addCommentOpen ? <p>Close</p> : <p>Add a comment</p>}</Button>
         {this.state.addCommentOpen && <AddComment postId={postId}/>}
