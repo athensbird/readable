@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import AddPost from '../components/AddPost';
 import Modal from 'react-modal'
 import { Link } from 'react-router-dom';
+import '../components/App.css';
+import { Button } from 'react-bootstrap';
+
 
 class AddPostContainer extends React.Component{
   constructor() {
@@ -26,12 +29,15 @@ class AddPostContainer extends React.Component{
   render() {
     const { addPostModalOpen } = this.state;
     return (
-      <div>
-        <button onClick={() => this.openAddPostModel()}>
+      <div className="add-post-container">
+        <Button onClick={() => this.openAddPostModel()}>
           Add a post!
-        </button>
+        </Button>
+        {this.state.addPostModalOpen &&
+          <AddPost
+            closeAddPost={() => this.closeAddPostModel()}
+          />}
         <br/>
-        <Link to={'/'}>Home</Link>
         <Modal
           className='modal'
           overlayClassName='overlay'

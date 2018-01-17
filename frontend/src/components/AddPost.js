@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { add_post } from '../actions';
+import { RaisedButton } from 'material-ui/List'
+import Menu from 'material-ui/Menu';
+import MenuItem from 'material-ui/MenuItem';
+import MdAdd from 'react-icons/lib/md/add'
+import MdExitToApp from 'react-icons/lib/md/exit-to-app'
+import './App.css'
 
 class AddPost extends React.Component {
   constructor(props) {
@@ -45,38 +51,56 @@ class AddPost extends React.Component {
       <Form onSubmit={(e) => {
         this.handleSubmit(e);
       }}>
-        Title: <input
+        <input
+          size="60"
+          className="input-title"
           onChange={this.handleTitle.bind(this)}
           value={this.state.title}
           placeholder="Enter the title" />
-        <br />
-        Body: <input
+        <input
+          size="60"
+          className="input-body"
           onChange={this.handleBody.bind(this)}
           value={this.state.body}
           placeholder="Enter the post body" />
-        <br />
-        Author: <input
+        <input
+          className="add-post-input input-author"
           onChange={this.handleAuthor.bind(this)}
           value={this.state.author}
           placeholder="Enter the author" />
-        <br />
-        Category: <input
+        <input
+          className="add-post-input input-category"
           onChange={this.handleCategory.bind(this)}
           value={this.state.category}
           placeholder="Enter the category" />
-        <br />
-        <Button
-          onClick={(e) => {this.handleSubmit(e)}}
-        >Add a new post</Button>
-        <Button
-        >Update the post</Button>
-        <Button
-          onClick={() => this.props.closeAddPost()}
-        >Exit</Button>
+        <Row className="add-post-icons">
+          <Button
+            className="add-post-icon"
+            onClick={(e) => {
+              this.handleSubmit(e);
+              this.props.closeAddPost();
+            }}
+          ><MdAdd /></Button>
+          <Button
+            className="add-post-icon"
+            onClick={() => this.props.closeAddPost()}
+          ><MdExitToApp /></Button>
+        </Row>
       </Form>
     )
   }
 }
+
+/*
+<Button
+  onClick={(e) => {this.handleSubmit(e)}}
+>Add a new post</Button>
+<Button
+>Update the post</Button>
+<Button
+  onClick={() => this.props.closeAddPost()}
+>Exit</Button>
+*/
 
 function mapDispatchToProps (dispatch) {
   return {

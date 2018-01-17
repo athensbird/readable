@@ -22,6 +22,10 @@
   font-size: large;
 }
 
+p {
+  text-align: center;
+}
+
 .TiArrowSortedUp {
   font-size: 15;
 }
@@ -36,6 +40,60 @@
 
 .addComment {
   text-align: center;
+}
+
+.category-list {
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+Form {
+  margin-top: 2%;
+}
+
+.add-post-input-container {
+  width: 100%;
+  text-align: center;
+}
+
+.input-title {
+  margin-left: 40%;
+  margin-right: 30%;
+  display: block;
+}
+
+.input-body {
+  margin-left: 40%;
+  margin-right: 30%;
+  display: block;
+  height: 200px;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
+.add-post-input {
+  display: inline-block;
+  margin-left: 0.5%;
+  margin-right: 0.5%;
+  margin-top: 0.2%;
+  margin-bottom: 0.2%;
+}
+
+.add-post-container {
+  margin-top: 5%;
+  margin-bottom: 5%;
+  text-align: center;
+}
+
+.add-post-icons {
+  width: 100%;
+}
+
+.add-post-icon {
+  margin-top: 2%;
+  margin-left: 0.2%;
+  margin-right: 0.2%;
+  display: inline-block;
 }
 
 @keyframes App-logo-spin {
