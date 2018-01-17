@@ -29,7 +29,3 @@ function Postlist(props) {
 }
 
 export default Postlist;
-
-/*
-<Post post={post} key={post.id}/>
-*/

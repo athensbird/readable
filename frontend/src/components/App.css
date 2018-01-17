@@ -40,6 +40,16 @@ p {
   font-size: 15;
 }
 
+.sort-button-list {
+  text-align: center;
+}
+
+.sort-button {
+  display: inline-block;
+  margin-left: 1%;
+  margin-right: 1%;
+}
+
 .comment {
   text-align: center;
 }
@@ -131,8 +141,8 @@ Form {
 }
 
 .add-post-container {
-  margin-top: 5%;
-  margin-bottom: 5%;
+  margin-top: 2%;
+  margin-bottom: 1%;
   text-align: center;
 }
 

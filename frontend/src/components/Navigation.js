@@ -15,10 +15,10 @@ function Navigation(props) {
   return (
     <Navbar>
         <Nav className="nav-bar">
-          <NavItem eventKey={i++} className="NavItem" href="/">Home</NavItem>
+          <NavItem key={9900} className="NavItem" href="/">Home</NavItem>
           {categories && categories.map(c => {
             return (
-              <NavItem eventKey={i++} className="navitems" href={`./${c.name}/posts`}>
+              <NavItem key={i++} className="navitems" href={`/${c.name}/posts`}>
                 {cap(c.name)}
               </NavItem>
             )})}
