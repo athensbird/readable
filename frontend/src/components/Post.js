@@ -2,11 +2,13 @@ import React, { Component }from 'react';
 import UpdatePostModal from './UpdatePostModal';
 import CommentList from './CommentList';
 import AddComment from './AddComment';
+import ErrorPage from './ErrorPage';
 import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import {
   load_posts,
   update_post,
+  delete_post,
   change_vote,
   load_comments,
   change_comment_vote,
@@ -16,7 +18,8 @@ import { Link } from "react-router-dom";
 import TiArrowSortedUp from 'react-icons/lib/ti/arrow-sorted-up';
 import TiArrowSortedDown from 'react-icons/lib/ti/arrow-sorted-down';
 import MdArrowBack from 'react-icons/lib/md/arrow-back'
-import FaEdit from 'react-icons/lib/fa/edit'
+import FaEdit from 'react-icons/lib/fa/edit';
+import MdClear from 'react-icons/lib/md/clear';
 import './Post.css'
 
 class Post extends React.Component {
@@ -57,7 +60,7 @@ class Post extends React.Component {
     const comments = this.props.comments.commentList.filter(c => c.parentId === postId)
     return (
       <div className="post">
-        {this.state.loadingPosts ? <p>loading</p> :
+        {post ?
           <div>
             <div className="vote-section">
               <h2>{post.title}</h2>
@@ -74,15 +77,17 @@ class Post extends React.Component {
                     if (post.voteScore > 0) {
                     this.props.changeVote(post.id,"downVote")
                   } else {
-                    console.log('Error: voteScore cannot be negative!');
+                    alert('Error: voteScore cannot be negative!');
                   }}}
                 ><TiArrowSortedDown /></Button>
                 <Button
                   onClick={() => {this.toggleUpdateModal()}}
                   className="vote-button"
-                >
-                  <FaEdit />
-                </Button>
+                ><FaEdit /></Button>
+                <Button
+                  className="vote-button"
+                  onClick={() => this.props.deletePost(post.id)}
+                ><MdClear /></Button>
                 <p className="post-author">By {post.author}</p>
             </div>
             <p className="post-body">{post.body}</p>
@@ -105,7 +110,7 @@ class Post extends React.Component {
               onClick={() => this.toggleAddComment()}>{this.state.addCommentOpen ? <p>Close</p> : <p>Add a comment</p>}
             </Button>
             {this.state.addCommentOpen && <AddComment postId={postId}/>}
-          </div>
+          </div> : <div><ErrorPage /></div>
         }
         <Link to={"/"}><Button className="back-button"><MdArrowBack /></Button></Link>
       </div>
@@ -124,6 +129,7 @@ function mapDispatchToProps (dispatch) {
   return {
     loadPosts: () => dispatch(load_posts()),
     updatePost: (id, content) => dispatch(update_post(id, content)),
+    deletePost: (id) => dispatch(delete_post(id)),
     changeVote: (id, option) => dispatch(change_vote(id, option)),
     loadComments: (id) => dispatch(load_comments(id)),
     changeCommentVote: (postId, commentId, option) => dispatch(change_comment_vote(postId, commentId, option)),
