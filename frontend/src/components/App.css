@@ -26,6 +26,12 @@ p {
   text-align: center;
 }
 
+.nav-bar-nav {
+  text-align: center;
+  margin-left: 30%;
+  margin-right: 30%;
+}
+
 .TiArrowSortedUp {
   font-size: 15;
 }
@@ -141,9 +147,13 @@ Form {
   display: inline-block;
 }
 
+.post-title-link {
+  float: left;
+}
+
 .master-delete-post-button {
   float: right;
-  margin-right: 10%;
+  margin-right: 5%;
 }
 
 .vote-button {
@@ -208,6 +218,24 @@ Form {
   margin-left: 20%;
   margin-right: 20%;
   text-align: justify;
+}
+
+.post-list {
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+.jumbotron {
+  text-align: center;
+}
+
+.home {
+  text-align: center;
+  margin-left: 3%;
+}
+
+ListItem {
+  margin-top: 1%;
 }
 
 h2 {

@@ -37,6 +37,7 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         <div>
+          <Navigation categories={this.props.categories} />
           <Switch>
             <Route path="/categories">
               <Category categories={this.props.categories} />
@@ -47,11 +48,13 @@ class App extends React.Component {
               component={Post}
             />
             <Route path="/">
-              <Category
-                categories={this.props.categories}
-                posts={this.props.posts}
-                deletePost={(id) => this.props.deletePost(id)}
-              />
+              <div>
+                <Category
+                  categories={this.props.categories}
+                  posts={this.props.posts}
+                  deletePost={(id) => this.props.deletePost(id)}
+                />
+              </div>
             </Route>
           </Switch>
         </div>

@@ -1,14 +1,27 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import {Navbar, Nav, NavItem} from "react-bootstrap";
+import RaisedButton from 'material-ui/RaisedButton';
 
-function Navigation() {
+function cap(word) {
+  const firstPart = word[0].toUpperCase();
+  const secondPart = word.slice(1, word.length);
+  return firstPart + secondPart;
+}
+
+function Navigation(props) {
+  const { categories } = props;
+  let i = 0;
   return (
     <Navbar>
-        <Nav>
-          <NavItem eventKey="1" className="navitems" href="/categories">Categories</NavItem>
-          <NavItem eventKey="2" className="navitems" href="/posts">Posts</NavItem>
-          <NavItem eventKey="3" className="navitems" href="/addpost">Add a Post</NavItem>
+        <Nav className="nav-bar">
+          <NavItem eventKey={i++} className="NavItem" href="/">Home</NavItem>
+          {categories && categories.map(c => {
+            return (
+              <NavItem eventKey={i++} className="navitems" href={`./${c.name}/posts`}>
+                {cap(c.name)}
+              </NavItem>
+            )})}
         </Nav>
       </Navbar>
   );

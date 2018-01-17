@@ -123,23 +123,6 @@ class AddPost extends React.Component {
   }
 }
 
-/*
-<Button
-  onClick={(e) => {this.handleSubmit(e)}}
->Add a new post</Button>
-<Button
->Update the post</Button>
-<Button
-  onClick={() => this.props.closeAddPost()}
->Exit</Button>
-<input
-  size="60"
-  className="input-body"
-  onChange={this.handleBody.bind(this)}
-  value={this.state.body}
-  placeholder="Enter the post body" />
-*/
-
 function mapDispatchToProps (dispatch) {
   return {
     addPost: (post) => dispatch(add_post(post))

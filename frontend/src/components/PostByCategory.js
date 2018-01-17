@@ -6,6 +6,9 @@ import {
   delete_post
 } from '../actions';
 import { Link } from 'react-router-dom';
+import { List, ListItem } from 'material-ui/List';
+import { Jumbotron, Button } from 'react-bootstrap';
+import MdArrowBack from 'react-icons/lib/md/arrow-back'
 
 class PostByCategory extends React.Component {
   componentDidMount() {
@@ -13,13 +16,14 @@ class PostByCategory extends React.Component {
   }
   render() {
     const categoryName = this.props.match.params.category;
-    const posts = this.props.posts.filter(p => p.category === categoryName);
+    const posts = this.props.post ? this.props.posts.filter(p => p.category === categoryName) : [];
     return (
       <div>
-        <ul>
+        <Jumbotron><h2>{`Let's learn about ${categoryName}`}</h2></Jumbotron>
+        <List>
           <Postlist category={categoryName} posts={this.props.posts} deletePost={this.props.deletePost} />
-        </ul>
-        <Link to={'/'}>Home</Link>
+        </List>
+        <Link to={'/'} className="home"><Button><MdArrowBack /></Button></Link>
       </div>
     );
   }
