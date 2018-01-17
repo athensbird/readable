@@ -23,7 +23,7 @@ function CommentList(props) {
         <Jumbotron key={comment.id}>
           {!comment.deleted ? <div>
             <p className="comment-author">{comment.author}</p>
-            <p className="comment-vote">{comment.voteScore}</p>
+            <p className="comment-vote"><h5>{comment.voteScore}</h5></p>
             <Button
               className="comment-button"
               onClick={() => {

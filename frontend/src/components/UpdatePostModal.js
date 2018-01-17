@@ -38,8 +38,7 @@ class UpdatePostModal extends React.Component {
           className="input-update-title"
           onChange={this.handleTitle.bind(this)}
           value={this.state.title} />
-          <br />
-        <input
+        <textarea
           className="input-update-body"
           onChange={this.handleBody.bind(this)}
           value={this.state.body} />

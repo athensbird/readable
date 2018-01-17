@@ -57,12 +57,12 @@ class AddPost extends React.Component {
           onChange={this.handleTitle.bind(this)}
           value={this.state.title}
           placeholder="Enter the title" />
-        <input
-          size="60"
+        <textarea
           className="input-body"
           onChange={this.handleBody.bind(this)}
           value={this.state.body}
-          placeholder="Enter the post body" />
+          placeholder="Enter the post body"
+        />
         <input
           className="add-post-input input-author"
           onChange={this.handleAuthor.bind(this)}
@@ -100,6 +100,12 @@ class AddPost extends React.Component {
 <Button
   onClick={() => this.props.closeAddPost()}
 >Exit</Button>
+<input
+  size="60"
+  className="input-body"
+  onChange={this.handleBody.bind(this)}
+  value={this.state.body}
+  placeholder="Enter the post body" />
 */
 
 function mapDispatchToProps (dispatch) {

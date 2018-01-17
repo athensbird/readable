@@ -57,13 +57,14 @@ Form {
 }
 
 .input-title {
-  margin-left: 40%;
+  margin-left: 35%;
   margin-right: 30%;
   display: block;
 }
 
 .input-body {
-  margin-left: 40%;
+  width: 30%;
+  margin-left: 35%;
   margin-right: 30%;
   display: block;
   height: 200px;
@@ -84,6 +85,7 @@ Form {
   margin-left: 30%;
   margin-right: 30%;
   height: 200px;
+  white-space: pre-wrap;
 }
 
 .add-post-input {
@@ -172,6 +174,7 @@ Form {
 
 .post-body {
   width: 60%;
+  white-space: pre-wrap;
 }
 
 .comment-author {
@@ -214,6 +217,15 @@ h5 {
   display: inline-block;
   margin-left: 5%;
   margin-right: 0.8%;
+  border-radius: 90%;
+  padding: 10px;
+  background: #fff;
+  border: 2px solid #666;
+  color: #666;
+}
+
+textarea {
+  white-space: pre-wrap;
 }
 
 @keyframes App-logo-spin {
