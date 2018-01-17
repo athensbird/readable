@@ -24,7 +24,7 @@ function Category(props) {
           </ListItem>
         ))}
       </List>
-      <AddPostContainer />
+      <AddPostContainer categories={categories} />
     </div>
   )
 }

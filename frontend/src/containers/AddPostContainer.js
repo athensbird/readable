@@ -5,10 +5,9 @@ import { Link } from 'react-router-dom';
 import '../components/App.css';
 import { Button } from 'react-bootstrap';
 
-
 class AddPostContainer extends React.Component{
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       addPostModalOpen: false
     }
@@ -25,9 +24,10 @@ class AddPostContainer extends React.Component{
   }
   componentWillMount() {
     Modal.setAppElement('body');
- }
+  }
   render() {
     const { addPostModalOpen } = this.state;
+    const { categories } = this.props;
     return (
       <div className="add-post-container">
         <Button onClick={() => this.openAddPostModel()}>
@@ -36,6 +36,7 @@ class AddPostContainer extends React.Component{
         {this.state.addPostModalOpen &&
           <AddPost
             closeAddPost={() => this.closeAddPostModel()}
+            categories={categories}
           />}
         <br/>
         <Modal

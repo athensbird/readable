@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Button, Form, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { add_post } from '../actions';
-import { RaisedButton } from 'material-ui/List'
-import Menu from 'material-ui/Menu';
-import MenuItem from 'material-ui/MenuItem';
+import { RaisedButton } from 'material-ui/List';
+import { DropdownButton, MenuItem } from 'react-bootstrap';
+import uuid from 'uuid';
 import MdAdd from 'react-icons/lib/md/add'
 import MdExitToApp from 'react-icons/lib/md/exit-to-app'
 import './App.css'
@@ -34,9 +34,9 @@ class AddPost extends React.Component {
       author: event.target.value
     });
   }
-  handleCategory(event) {
+  handleCategory(event, eventKey) {
     this.setState({
-      category: event.target.value
+      category: eventKey.target.innerHTML
     });
   }
   validateForm(e) {
@@ -66,7 +66,11 @@ class AddPost extends React.Component {
     }
   }
   render() {
-    const { closeAddPost, deletePost, updatePost } = this.props;
+    const { closeAddPost, deletePost, updatePost, categories } = this.props;
+    let categoryList = null;
+    if (categories) { categoryList = categories.map(c => {
+      return c.name;
+    })}
     return (
       <Form onSubmit={(e) => {
         this.validateForm(e);
@@ -89,11 +93,18 @@ class AddPost extends React.Component {
           onChange={this.handleAuthor.bind(this)}
           value={this.state.author}
           placeholder="Enter the author" />
-        <input
-          className="add-post-input input-category"
-          onChange={this.handleCategory.bind(this)}
-          value={this.state.category}
-          placeholder="Enter the category" />
+        <DropdownButton
+          id={uuid()}
+          options={categoryList}
+          title={this.state.category ? this.state.category : 'Select a category'}
+          placeholder="Enter the category"
+          onSelect={(e, eventKey) => this.handleCategory(e, eventKey)}
+        >
+          {categoryList && categoryList.map(item => {
+            return (
+              <MenuItem key={uuid()}>{item}</MenuItem>
+            )})}
+        </DropdownButton>
         <Row className="add-post-icons">
           <Button
             className="add-post-icon"
