@@ -16,6 +16,7 @@ function Postlist(props) {
             <Link to={"/posts/" + post.id}>{post.title}</Link>
             <br />
             <Button
+              className="master-delete-post-button"
               onClick={() => props.deletePost(post.id)}
             >Delete the post</Button>
           </ListItem>

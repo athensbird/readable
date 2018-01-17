@@ -29,7 +29,8 @@ class UpdateComment extends React.Component {
     const { comment } = this.props;
     return (
       <Form onSubmit={(e) => this.handleSubmit(e)}>
-        Body: <input
+        <input
+          className="update-comment-input"
           onChange={this.handleBody.bind(this)}
           value={this.state.body} />
         <br />

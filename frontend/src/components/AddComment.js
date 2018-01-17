@@ -40,17 +40,18 @@ class AddComment extends React.Component {
         <Form onSubmit={(e) => {
           this.handleSubmit(e);
         }}>
-          Body: <input
-            onChange={this.handleBody.bind(this)}
-            value={this.state.body}
-            placeholder="Enter the post body" />
-          <br />
-          Author: <input
+          <input
+            className="add-comment-input-author"
             onChange={this.handleAuthor.bind(this)}
             value={this.state.author}
             placeholder="Enter the author" />
-          <br />
+          <input
+            className="add-comment-input-body"
+            onChange={this.handleBody.bind(this)}
+            value={this.state.body}
+            placeholder="Enter the post body" />
           <Button
+            className="add-new-comment-button"
             onClick={(e) => {this.handleSubmit(e)}}
           >Add a new comment</Button>
         </Form>

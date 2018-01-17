@@ -34,11 +34,13 @@ class UpdatePostModal extends React.Component {
     const { post } = this.props;
     return (
       <Form onSubmit={(e) => this.handleSubmit(e)}>
-        Title: <input
+        <input
+          className="input-update-title"
           onChange={this.handleTitle.bind(this)}
           value={this.state.title} />
           <br />
-        Body: <input
+        <input
+          className="input-update-body"
           onChange={this.handleBody.bind(this)}
           value={this.state.body} />
         <br />

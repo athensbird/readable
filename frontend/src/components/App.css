@@ -71,12 +71,54 @@ Form {
   margin-bottom: 1%;
 }
 
+.input-update-title {
+  display: block;
+  width: 40%;
+  margin-left: 30%;
+  margin-right: 30%;
+}
+
+.input-update-body {
+  display: block;
+  width: 40%;
+  margin-left: 30%;
+  margin-right: 30%;
+  height: 200px;
+}
+
 .add-post-input {
   display: inline-block;
   margin-left: 0.5%;
   margin-right: 0.5%;
   margin-top: 0.2%;
   margin-bottom: 0.2%;
+}
+
+.update-comment-input {
+  width: 40%;
+  height: 80px;
+  margin-bottom: 1%;
+}
+
+.add-comment-input-author {
+  margin-left: 35%;
+  margin-right: 30%;
+  width: 30%;
+  margin-bottom: 1%;
+  display: block;
+}
+
+.add-comment-input-body {
+  width: 30%;
+  margin-left: 35%;
+  margin-right: 30%;
+  height: 80px;
+  margin-bottom: 1%;
+  display: block;
+}
+
+.add-new-comment-button {
+  margin-bottom: 1%;
 }
 
 .add-post-container {
@@ -94,6 +136,84 @@ Form {
   margin-left: 0.2%;
   margin-right: 0.2%;
   display: inline-block;
+}
+
+.master-delete-post-button {
+  float: right;
+  margin-right: 10%;
+}
+
+.vote-button {
+  display: inline-block;
+  font-size: 12px;
+  margin-left: 0.3%;
+  margin-right: 0.2%;
+}
+
+.comment-button {
+  margin-left: 0.3%;
+  margin-right: 0.3%;
+  display: inline-block;
+  font-size: 12px;
+}
+
+.post {
+  text-align: center;
+  font-family: 'Didact Gothic';
+  width: 60%;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+.post-author {
+  font-size: 15px;
+  font-style: italic;
+}
+
+.post-body {
+  width: 60%;
+}
+
+.comment-author {
+  display: inline-block;
+  margin-right: 25%;
+  font-style: italic;
+}
+
+.comment-vote {
+  display: inline-block;
+  margin-right: 1%;
+}
+
+.add-comment-button {
+  display: inline-block;
+  margin-left: 0.5%;
+  margin-right: 0.5%;
+  margin-bottom: 1%;
+  margin-top: 2%;
+}
+
+.back-button {
+  display: inline-block;
+  margin-left: 0.5%;
+  margin-right: 0.5%;
+}
+
+.post-body {
+  margin-top: 2%;
+  margin-left: 20%;
+  margin-right: 20%;
+  text-align: justify;
+}
+
+h2 {
+  display: inline-block;
+}
+
+h5 {
+  display: inline-block;
+  margin-left: 5%;
+  margin-right: 0.8%;
 }
 
 @keyframes App-logo-spin {

@@ -15,6 +15,8 @@ import {
 import { Link } from "react-router-dom";
 import TiArrowSortedUp from 'react-icons/lib/ti/arrow-sorted-up';
 import TiArrowSortedDown from 'react-icons/lib/ti/arrow-sorted-down';
+import MdArrowBack from 'react-icons/lib/md/arrow-back'
+import FaEdit from 'react-icons/lib/fa/edit'
 import './Post.css'
 
 class Post extends React.Component {
@@ -55,30 +57,36 @@ class Post extends React.Component {
     const post = this.props.posts[0] ? this.props.posts.find(p => p.id === postId) : {};
     const comments = this.props.comments.commentList.filter(c => c.parentId === postId)
     return (
-      <div>
+      <div className="post">
         {this.state.loadingPosts ? <p>loading</p> :
           <div>
-            <h2>title: {post.title}</h2>
-            <h3>content: {post.body}</h3>
-            <p>voteScore: {post.voteScore}</p>
-            <Button
-              onClick={() => {
-                this.props.changeVote(post.id,"upVote");
-              }}
-            ><TiArrowSortedUp /></Button>
-            <Button
-            onClick={() => {
-              if (post.voteScore > 0) {
-              this.props.changeVote(post.id,"downVote")
-            } else {
-              console.log('Error: voteScore cannot be negative!');
-            }}}
-            ><TiArrowSortedDown /></Button>
-            <p>author: {post.author}</p>
-            <p>#comments: {post.commentCount}</p>
-            <Button onClick={() => {this.toggleUpdateModal()}}>
-            {this.state.updatePostModalOpen ? <p>close update</p> : <p>update post</p>}
-            </Button>
+            <div className="vote-section">
+              <h2>{post.title}</h2>
+              <h5>{post.voteScore}</h5>
+                <Button
+                  className="vote-button"
+                  onClick={() => {
+                    this.props.changeVote(post.id,"upVote");
+                  }}
+                ><TiArrowSortedUp /></Button>
+                <Button
+                  className="vote-button"
+                  onClick={() => {
+                    if (post.voteScore > 0) {
+                    this.props.changeVote(post.id,"downVote")
+                  } else {
+                    console.log('Error: voteScore cannot be negative!');
+                  }}}
+                ><TiArrowSortedDown /></Button>
+                <Button
+                  onClick={() => {this.toggleUpdateModal()}}
+                  className="vote-button"
+                >
+                  <FaEdit />
+                </Button>
+                <p className="post-author">By {post.author}</p>
+            </div>
+            <p className="post-body">{post.body}</p>
             {this.state.updatePostModalOpen &&
               <UpdatePostModal
                 post={post}
@@ -92,11 +100,14 @@ class Post extends React.Component {
               toggleUpdateComment={() => this.toggleUpdateComment()}
               updateCommentOpen={this.state.updateCommentOpen}
             />
-            <Button onClick={() => this.toggleAddComment()}>{this.state.addCommentOpen ? <p>Close</p> : <p>Add a comment</p>}</Button>
+            <Button
+              className="add-comment-button"
+              onClick={() => this.toggleAddComment()}>{this.state.addCommentOpen ? <p>Close</p> : <p>Add a comment</p>}
+            </Button>
             {this.state.addCommentOpen && <AddComment postId={postId}/>}
           </div>
         }
-        <Link to={"/"}>Back to list</Link>
+        <Link to={"/"}><Button className="back-button"><MdArrowBack /></Button></Link>
       </div>
     );
   }
