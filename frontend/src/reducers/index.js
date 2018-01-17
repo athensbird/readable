@@ -33,18 +33,14 @@ function post (state = {}, action) {
 }
 
 function category (state = [], action) {
-  switch (action.type) {
-    case CATEGORIES_LOADED:
-      return action.categories
-    default:
-      return state;
-  }
+  if (action.type === CATEGORIES_LOADED) {
+    return action.categories;
+  } else {return state}
 }
 
 function comment (state = initialCommentList, action) {
   switch (action.type) {
     case COMMENTS_LOADED:
-      console.log(action);
       return {
         ...state,
         commentList: state.commentList.concat(action.comments.filter(c => {
@@ -55,7 +51,6 @@ function comment (state = initialCommentList, action) {
         }).map(c => c.id))
       }
     case SINGLE_COMMENT_LOADED:
-      console.log(action.comment);
       const updatedComments = state.commentList.map(c => {
         if (c.id === action.comment.id) {
           return action.comment;

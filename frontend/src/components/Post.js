@@ -31,7 +31,6 @@ class Post extends React.Component {
   }
   componentDidMount() {
     this.props.loadPosts();
-    console.log('Post loaded!')
     this.props.loadComments(this.props.match.params.id);
     this.setState({
       loadingPosts: false
