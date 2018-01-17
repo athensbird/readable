@@ -12,8 +12,23 @@ class UpdatePostModal extends React.Component {
       body: this.props.post.body
     };
   }
-  handleSubmit(e) {
+  validatePostUpdate(e) {
     e.preventDefault();
+    let validated = true;
+    if (typeof this.state.title !== 'string' || !this.state.title) {
+      alert('Invalid title!');
+      validated = false;
+    }
+    if (typeof this.state.body !== 'string' || !this.state.body) {
+      alert('Invalid body!');
+      validated = false;
+    }
+    if (validated) {
+      this.handleSubmit(e);
+      this.props.toggleUpdatePost();
+    }
+  }
+  handleSubmit(e) {
     const { post } = this.props;
     if (this.props.updatePost) {
       console.log('handle Submit called!');
@@ -31,9 +46,9 @@ class UpdatePostModal extends React.Component {
     });
   }
   render() {
-    const { post } = this.props;
+    const { post, toggleUpdatePost } = this.props;
     return (
-      <Form onSubmit={(e) => this.handleSubmit(e)}>
+      <Form onSubmit={(e) => this.validatePostUpdate(e)}>
         <input
           className="input-update-title"
           onChange={this.handleTitle.bind(this)}
@@ -43,7 +58,7 @@ class UpdatePostModal extends React.Component {
           onChange={this.handleBody.bind(this)}
           value={this.state.body} />
         <br />
-        <Button onClick={(e) => this.handleSubmit(e)}>Submit</Button>
+        <Button onClick={(e) => this.validatePostUpdate(e)}>Update Post</Button>
       </Form>
     )
   }

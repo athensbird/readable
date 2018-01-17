@@ -91,6 +91,7 @@ class Post extends React.Component {
               <UpdatePostModal
                 post={post}
                 updatePost={(id, content) => this.props.updatePost(id,content)}
+                toggleUpdatePost = {() => this.toggleUpdateModal()}
               />}
             <CommentList
               comments={comments}

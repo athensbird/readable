@@ -12,8 +12,20 @@ class UpdateComment extends React.Component {
       body: this.props.comment.body
     };
   }
-  handleSubmit(e) {
+  validateUpdateComment(e) {
     e.preventDefault();
+    let validated = true;
+    console.log(typeof this.state.body);
+    if (typeof this.state.body !== 'string' || !this.state.body) {
+      alert('Invalid body!');
+      validated = false;
+    }
+    if (validated) {
+      this.handleSubmit(e);
+      this.props.toggleUpdateComment();
+    }
+  }
+  handleSubmit(e) {
     const { comment } = this.props;
     if (this.props.updateComment) {
       console.log('handle Comment Submit called!');
@@ -26,15 +38,15 @@ class UpdateComment extends React.Component {
     });
   }
   render() {
-    const { comment } = this.props;
+    const { comment, toggleUpdateComment } = this.props;
     return (
-      <Form onSubmit={(e) => this.handleSubmit(e)}>
+      <Form onSubmit={(e) => this.validateUpdateComment(e)}>
         <input
           className="update-comment-input"
           onChange={this.handleBody.bind(this)}
           value={this.state.body} />
         <br />
-        <Button onClick={(e) => this.handleSubmit(e)}>Update Comment</Button>
+        <Button onClick={(e) => this.validateUpdateComment(e)}>Update Comment</Button>
         <br />
         <br />
       </Form>

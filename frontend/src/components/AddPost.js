@@ -39,8 +39,28 @@ class AddPost extends React.Component {
       category: event.target.value
     });
   }
-  handleSubmit(e) {
+  validateForm(e) {
     e.preventDefault();
+    let validated = true;
+    if (typeof this.state.title !== 'string' || !this.state.title) {
+      alert('Invalid title!');
+      validated = false;
+    }
+    if (typeof this.state.body !== 'string' || !this.state.body) {
+      alert('Invalid body!');
+      validated = false;
+    }
+    if (typeof this.state.author !== 'string' || !this.state.author) {
+      alert('Invalid author!');
+      validated = false;
+    }
+    if (typeof this.state.category !== 'string' || !this.state.category) {
+      alert('Invalid category!');
+      validated = false;
+    }
+    if (validated) {this.handleSubmit(e)};
+  }
+  handleSubmit(e) {
     if (this.props.addPost) {
       this.props.addPost(this.state);
     }
@@ -49,9 +69,10 @@ class AddPost extends React.Component {
     const { closeAddPost, deletePost, updatePost } = this.props;
     return (
       <Form onSubmit={(e) => {
-        this.handleSubmit(e);
+        this.validateForm(e);
       }}>
         <input
+          required
           size="60"
           className="input-title"
           onChange={this.handleTitle.bind(this)}
@@ -77,7 +98,7 @@ class AddPost extends React.Component {
           <Button
             className="add-post-icon"
             onClick={(e) => {
-              this.handleSubmit(e);
+              this.validateForm(e);
               this.props.closeAddPost();
             }}
           ><MdAdd /></Button>

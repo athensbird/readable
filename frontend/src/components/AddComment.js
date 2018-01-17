@@ -27,8 +27,20 @@ class AddComment extends React.Component {
       author: event.target.value
     });
   }
-  handleSubmit(e) {
+  validateCommentForm(e) {
     e.preventDefault();
+    let validated = true;
+    if (typeof this.state.author !== 'string' || !this.state.author) {
+      alert('Invalid author!');
+      validated = false;
+    }
+    if (typeof this.state.body !== 'string' || !this.state.body) {
+      alert('Invalid body!');
+      validated = false;
+    }
+    if (validated) {this.handleSubmit(e)};
+  }
+  handleSubmit(e) {
     if (this.props.addComment) {
       this.props.addComment(this.state);
     }
@@ -38,7 +50,7 @@ class AddComment extends React.Component {
     return (
       <div className="addComment">
         <Form onSubmit={(e) => {
-          this.handleSubmit(e);
+          this.validateCommentForm(e);
         }}>
           <input
             className="add-comment-input-author"
@@ -52,7 +64,7 @@ class AddComment extends React.Component {
             placeholder="Enter the post body" />
           <Button
             className="add-new-comment-button"
-            onClick={(e) => {this.handleSubmit(e)}}
+            onClick={(e) => {this.validateCommentForm(e)}}
           >Add a new comment</Button>
         </Form>
       </div>

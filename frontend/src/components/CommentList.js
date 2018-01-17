@@ -23,7 +23,7 @@ function CommentList(props) {
         <Jumbotron key={comment.id}>
           {!comment.deleted ? <div>
             <p className="comment-author">{comment.author}</p>
-            <p className="comment-vote"><h5>{comment.voteScore}</h5></p>
+            <p className="comment-vote">{comment.voteScore}</p>
             <Button
               className="comment-button"
               onClick={() => {
@@ -44,8 +44,11 @@ function CommentList(props) {
               className="comment-button"
               onClick={() => props.toggleUpdateComment()}
             ><FaEdit /></Button>
-            {props.updateCommentOpen && <UpdateComment comment={comment} /> }
             <p>{comment.body}</p>
+            {props.updateCommentOpen && <UpdateComment
+              comment={comment}
+              toggleUpdateComment={() => props.toggleUpdateComment()}
+            /> }
           </div> : null }
         </Jumbotron>
       ))}
