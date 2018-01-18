@@ -14,6 +14,7 @@ import Post from './Post';
 import AddPost from './AddPost';
 import AddPostContainer from '../containers/AddPostContainer';
 import Navigation from './Navigation';
+import Footer from './Footer';
 import './App.css';
 
 class App extends React.Component {
@@ -57,6 +58,7 @@ class App extends React.Component {
               </div>
             </Route>
           </Switch>
+          <Footer />
         </div>
       </BrowserRouter>
     );

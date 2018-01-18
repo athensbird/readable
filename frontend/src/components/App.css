@@ -255,6 +255,11 @@ ListItem {
   margin-left: 30%;
 }
 
+.well {
+  margin-top: 5%;
+  text-align: center;
+}
+
 h2 {
   display: inline-block;
 }
