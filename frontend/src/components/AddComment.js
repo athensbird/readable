@@ -44,9 +44,10 @@ class AddComment extends React.Component {
     if (this.props.addComment) {
       this.props.addComment(this.state);
     }
+    this.props.toggleAddComment();
   }
   render() {
-    const { addComment } = this.props;
+    const { addComment, toggleAddComment } = this.props;
     return (
       <div className="addComment">
         <Form onSubmit={(e) => {

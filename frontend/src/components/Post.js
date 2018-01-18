@@ -111,7 +111,7 @@ class Post extends React.Component {
               onClick={() => this.toggleAddComment()}>{this.state.addCommentOpen ? <p>Close</p> : <p>Add a comment</p>}
             </Button>
             <Link to={"/"}><Button className="back-button"><MdArrowBack /></Button></Link>
-            {this.state.addCommentOpen && <AddComment postId={postId}/>}
+            {this.state.addCommentOpen && <AddComment toggleAddComment={() => this.toggleAddComment()} postId={postId}/>}
           </div> : <div><ErrorPage /></div>
         }
       </div>
