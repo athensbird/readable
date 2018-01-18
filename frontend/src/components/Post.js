@@ -3,7 +3,7 @@ import UpdatePostModal from './UpdatePostModal';
 import CommentList from './CommentList';
 import AddComment from './AddComment';
 import ErrorPage from './ErrorPage';
-import { Button } from 'react-bootstrap';
+import { Button, Panel } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import {
   load_posts,
@@ -97,6 +97,7 @@ class Post extends React.Component {
                 updatePost={(id, content) => this.props.updatePost(id,content)}
                 toggleUpdatePost = {() => this.toggleUpdateModal()}
               />}
+            <Panel>{`Comments: ${post.commentCount}`}</Panel>
             <CommentList
               comments={comments}
               changeCommentVote={(postId, commentId, option) => this.props.changeCommentVote(postId,commentId,option)}
@@ -109,10 +110,10 @@ class Post extends React.Component {
               className="add-comment-button"
               onClick={() => this.toggleAddComment()}>{this.state.addCommentOpen ? <p>Close</p> : <p>Add a comment</p>}
             </Button>
+            <Link to={"/"}><Button className="back-button"><MdArrowBack /></Button></Link>
             {this.state.addCommentOpen && <AddComment postId={postId}/>}
           </div> : <div><ErrorPage /></div>
         }
-        <Link to={"/"}><Button className="back-button"><MdArrowBack /></Button></Link>
       </div>
     );
   }

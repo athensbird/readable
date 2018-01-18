@@ -211,9 +211,9 @@ Form {
 
 .add-comment-button {
   display: inline-block;
+  height: 30px;
   margin-left: 0.5%;
   margin-right: 0.5%;
-  margin-bottom: 1%;
   margin-top: 2%;
 }
 
@@ -221,6 +221,8 @@ Form {
   display: inline-block;
   margin-left: 0.5%;
   margin-right: 0.5%;
+  height: 30px;
+  margin-top: 2%;
 }
 
 .post-body {
@@ -246,6 +248,11 @@ Form {
 
 ListItem {
   margin-top: 1%;
+}
+
+.panel {
+  width: 40%;
+  margin-left: 30%;
 }
 
 h2 {

@@ -133,7 +133,8 @@ export function add_comment(comment) {
   }
   return function (dispatch) {
     postComment(commentBody).then(() => {
-      dispatch(load_comments(comment.parentId))
+      dispatch(load_comments(comment.parentId));
+      dispatch(load_posts())
     });
   }
 }
@@ -151,6 +152,7 @@ export function delete_comment(id, postId) {
   return function (dispatch) {
     deleteComment(id).then((comment) => {
       dispatch(single_comment_loaded(comment));
+      dispatch(load_posts());
     })
   }
 }
