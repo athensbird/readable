@@ -11,11 +11,33 @@ import { List, ListItem } from 'material-ui/List';
 import { Jumbotron, Button } from 'react-bootstrap';
 import MdArrowBack from 'react-icons/lib/md/arrow-back';
 import AddPostContainer from '../containers/AddPostContainer';
+import sortBy from 'sort-by';
 
 class PostByCategory extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      posts: this.props.posts
+    }
+  }
   componentDidMount() {
     this.props.loadPosts();
     this.props.loadCategories();
+  }
+  sortByVote() {
+    this.setState({
+      posts: this.props.posts.sort(sortBy('-voteScore'))
+    });
+  }
+  sortByTime() {
+    this.setState({
+      posts: this.props.posts.sort(sortBy('timestamp'))
+    });
+  }
+  sortByTitle() {
+    this.setState({
+      posts: this.props.posts.sort(sortBy('title'))
+    });
   }
   render() {
     const categoryName = this.props.match.params.category;
@@ -24,6 +46,12 @@ class PostByCategory extends React.Component {
       <div>
         <Jumbotron><h2>{`Let's learn about ${categoryName}`}</h2></Jumbotron>
         <AddPostContainer categories={this.props.categories} />
+        <div className="sort-button-list">
+          <h4 className="sort-button">Sort by</h4>
+          <Button className="sort-button" onClick={() => {this.sortByVote()}}>VoteCount</Button>
+          <Button className="sort-button" onClick={() => {this.sortByTime()}}>Time</Button>
+          <Button className="sort-button" onClick={() => {this.sortByTitle()}}>Title</Button>
+        </div>
         <List>
           <Postlist category={categoryName} posts={this.props.posts} deletePost={this.props.deletePost} />
         </List>

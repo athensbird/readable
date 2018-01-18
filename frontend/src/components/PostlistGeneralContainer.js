@@ -10,7 +10,6 @@ class PostlistGeneralContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      sortCriteria: 'timeStamp',
       posts: this.props.posts
     }
   }
