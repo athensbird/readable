@@ -3,16 +3,19 @@ import Postlist from './Postlist';
 import { connect } from 'react-redux';
 import {
   load_posts,
+  load_categories,
   delete_post
 } from '../actions';
 import { Link } from 'react-router-dom';
 import { List, ListItem } from 'material-ui/List';
 import { Jumbotron, Button } from 'react-bootstrap';
-import MdArrowBack from 'react-icons/lib/md/arrow-back'
+import MdArrowBack from 'react-icons/lib/md/arrow-back';
+import AddPostContainer from '../containers/AddPostContainer';
 
 class PostByCategory extends React.Component {
   componentDidMount() {
     this.props.loadPosts();
+    this.props.loadCategories();
   }
   render() {
     const categoryName = this.props.match.params.category;
@@ -20,6 +23,7 @@ class PostByCategory extends React.Component {
     return (
       <div>
         <Jumbotron><h2>{`Let's learn about ${categoryName}`}</h2></Jumbotron>
+        <AddPostContainer categories={this.props.categories} />
         <List>
           <Postlist category={categoryName} posts={this.props.posts} deletePost={this.props.deletePost} />
         </List>
@@ -31,13 +35,15 @@ class PostByCategory extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    posts: state.post
+    posts: state.post,
+    categories: state.category
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     loadPosts: () => dispatch(load_posts()),
+    loadCategories: () => dispatch(load_categories()),
     deletePost: (id) => dispatch(delete_post(id))
   }
 }

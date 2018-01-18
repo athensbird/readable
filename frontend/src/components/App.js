@@ -43,7 +43,7 @@ class App extends React.Component {
               <Category categories={this.props.categories} />
             </Route>
             <Route path="/:category/posts" component={PostByCategory} />
-            <Route path="/posts/:id"
+            <Route path="/:category/:id"
               exact
               component={Post}
             />

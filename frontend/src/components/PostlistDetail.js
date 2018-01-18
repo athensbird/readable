@@ -11,7 +11,7 @@ function PostlistDetail(props) {
       {posts.length > 0 && posts.map((post) => (
         <ListItem key={post.id ? post.id : post.commentCount}>
           <p>
-            <Link to={"/posts/" + post.id} className="post-title-link">{post.title}</Link>
+            <Link to={`/${post.category}/${post.id}`} className="post-title-link">{post.title}</Link>
             <Button
               className="master-delete-post-button"
               onClick={() => props.deletePost(post.id)}
